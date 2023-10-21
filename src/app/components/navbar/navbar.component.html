@@ -1,1 +1,46 @@
-<p>navbar works!</p>
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+
+  <button mat-icon-button class="example-icon favorite-icon"
+    *ngIf="!isAuth">
+    <mat-icon>login</mat-icon>
+  </button>
+
+  <button mat-icon-button class="example-icon" (click)="logout()"
+  *ngIf="isAuth">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</mat-toolbar>
+
+
+
+<ul>
+  <li>relatorios</li>
+  <li>
+    <ul>
+      <li><a routerLink="/relatorios/receitas">receitas</a></li>
+      <li><a routerLink="/relatorios/despesas">despesas</a></li>
+    </ul>
+  </li>
+  <li>lancamentos</li>
+  <li>
+    <ul>
+      <li>receitas</li>
+      <li>despesas</li>
+    </ul>
+  </li>
+  <li>main</li>
+  <li>
+    <ul>
+      <li><a routerLink="/main/login">login</a></li>
+      <li>registrar</li>
+      <li>page nao encontrada</li>
+      <li>dashboard</li>
+    </ul>
+  </li>
+</ul>
