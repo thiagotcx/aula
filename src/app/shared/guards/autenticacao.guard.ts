@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AutenticacaoState } from '../states/autenticacao.state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticacaoGuard implements CanActivate {
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authState: AutenticacaoState
+  ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
     console.log('Autenticacao guard em funcionamento na rota', route.url)
-    const isAutenticated: boolean = true;
 
-    if (isAutenticated) {
-      alert('login executado com sucesso')
+
+    if (this.authState.getIsAuthenticated) {
       return true;
     }
 

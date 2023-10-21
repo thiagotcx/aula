@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AutenticacaoState } from 'src/app/shared/states/autenticacao.state';
 
 @Component({
@@ -8,17 +9,33 @@ import { AutenticacaoState } from 'src/app/shared/states/autenticacao.state';
 })
 export class NavbarComponent {
 
-  public isAuth: boolean;
+  public isAuth: boolean = false;
+  public userName: String = "";
 
-  constructor(private authState: AutenticacaoState) {
-    this.isAuth = authState.getIsAuth();
+  constructor(
+    private authState: AutenticacaoState,
+    private router: Router
+  ) {
+    authState.getIsAuth().subscribe((isAuthenticaed) => {
+      console.log('observable isAuthenticaed', { isAuthenticaed })
+      this.isAuth = isAuthenticaed;
+    });
+
+    authState.getUserName().subscribe((userName) => {
+      console.log('observable userName', { userName })
+      this.userName = userName;
+    });
+  }
+
+  public login(): void {
+    this.router.navigate(["main", "login"])
   }
 
   public logout(): void {
     this.authState.setIsAuth(false);
-    this.isAuth = false
+    this.router.navigate(["main", "login"])
 
-    console.log({
+    console.log('logout', {
       isAuth: this.isAuth,
       state: this.authState.getIsAuth()
     })

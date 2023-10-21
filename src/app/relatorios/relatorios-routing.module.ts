@@ -12,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: 'receitas',
-    component: ReceitasComponent
+    component: ReceitasComponent,
+    canActivate: [AutenticacaoGuard]
   }
 ];
 

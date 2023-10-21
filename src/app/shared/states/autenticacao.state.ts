@@ -1,28 +1,42 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticacaoState {
 
-  private isAuth: boolean = true;
+  private isAuth = new BehaviorSubject<boolean>(false);
+  private isAuthenticated: boolean = false;
+  private userName = new BehaviorSubject<string>("");
 
   constructor() { }
 
-  public getIsAuth(): boolean {
-    return this.isAuth;
+  public getIsAuth(): Observable<boolean> {
+    return this.isAuth.asObservable();
   }
 
   public get getIsAuthenticated(): boolean {
-    return this.isAuth
+    return this.isAuthenticated;
   }
 
   public setIsAuth(isAuth: boolean) {
-    this.isAuth = isAuth
+    this.isAuth.next(isAuth)
+    this.isAuthenticated = isAuth;
   }
 
   public set setIsAuthenticated(isAuth: boolean) {
-    this.isAuth = isAuth
+    this.isAuth.next(isAuth)
+    this.isAuthenticated = isAuth;
+  }
+
+
+  public getUserName(): Observable<string> {
+    return this.userName.asObservable();
+  }
+
+  public setUserName(userName: string) {
+    this.userName.next(userName)
   }
 
 
