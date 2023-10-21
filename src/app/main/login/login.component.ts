@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { emailValidators } from 'src/app/shared/validators/email-validator';
+import { passwordValidators } from 'src/app/shared/validators/password-validator';
 
 @Component({
   selector: 'app-login',
@@ -11,21 +13,10 @@ export class LoginComponent {
   public loginForm: FormGroup;
   public teste: string = "asdasd"
 
-  private emailValidators: Validators[] = [
-    Validators.required,
-    Validators.email,
-    Validators.minLength(5)
-  ]
-
-  private passwordValidators: Validators[] = [
-    Validators.required,
-    Validators.minLength(5)
-  ]
-
   constructor(private fb: FormBuilder) {
     this.loginForm = fb.group({
-      email: ['', this.emailValidators],
-      password: ['', this.passwordValidators]
+      email: ['', emailValidators],
+      password: ['', passwordValidators]
     })
   }
 
@@ -37,7 +28,6 @@ export class LoginComponent {
       Validators.required, Validators.minLength(5)
     ])
   })
-
 
   emailFormControl = new FormControl('', [
     Validators.required, Validators.email, Validators.minLength(5)
