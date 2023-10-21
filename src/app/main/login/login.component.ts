@@ -86,7 +86,7 @@ export class LoginComponent {
 
     // if autencacao der sucesso ir para rota dashboard
 
-    this.router.navigate(["relatorios", "receitas"])
+    this.router.navigate(["main", "dashboard"])
 
       // else mostrar mensagem de erro
 
